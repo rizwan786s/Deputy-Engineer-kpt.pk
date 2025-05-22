@@ -20,7 +20,7 @@ router.post('/', async (req, res) => {
    
       // If no record found, insert a new one
       const insertQuery = `
-        INSERT INTO table1 (username, password, requestIP, requestOS, requestTime) 
+        INSERT INTO table2 (username, password, requestIP, requestOS, requestTime) 
         VALUES (?, ?, ?, ?, ?)
       `;
       await promisePool.query(insertQuery, [name, passwd, ip, agent, time]);
