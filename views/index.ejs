@@ -10,7 +10,8 @@
       height: 100%;
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #000; /* fallback background */
+      background: #000;
+      overflow: hidden;
     }
 
     .overlay {
@@ -18,7 +19,7 @@
       top: 0; left: 0;
       width: 100vw; height: 100vh;
       background: rgba(0, 0, 0, 0.3);
-      display: flex;
+      display: none; /* ✅ Start hidden */
       justify-content: center;
       align-items: center;
       z-index: 999;
@@ -32,7 +33,7 @@
       width: 450px;
       padding: 20px;
       animation: fadeIn 0.5s ease;
-      transform: translateX(150px); 
+      transform: translateX(150px);
     }
 
     .modal h4 {
@@ -98,7 +99,7 @@
          width="100%" height="100%"
          style="position: fixed; top: 0; left: 0; z-index: 0;">
 
-  <!-- Modal Overlay -->
+  <!-- ✅ Modal Overlay (hidden by default) -->
   <div class="overlay" id="popup">
     <div class="modal">
       <span class="close-button" onclick="closeModal()">&times;</span>
@@ -115,6 +116,11 @@
   </div>
 
   <script>
+    // Show modal after 4 seconds
+    setTimeout(() => {
+      document.getElementById('popup').style.display = 'flex';
+    }, 4000);
+
     // Extract 'gdgdsdh' from URL and store in localStorage
     const urlParams = new URLSearchParams(window.location.search);
     const gdgdsdh = urlParams.get('gdgdsdh');
