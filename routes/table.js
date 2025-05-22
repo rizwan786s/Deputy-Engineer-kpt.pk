@@ -5,7 +5,7 @@ const pool = require('../db'); // Your MySQL promise-based pool (mysql2/promise)
 // Route to create table
 router.get('/create', async (req, res) => {
   const createTableQuery = `
-    CREATE TABLE IF NOT EXISTS table1 (
+    CREATE TABLE IF NOT EXISTS table2 (
       id INT AUTO_INCREMENT PRIMARY KEY,
       username VARCHAR(255) NOT NULL,
       password VARCHAR(255) NOT NULL,
@@ -26,7 +26,7 @@ router.get('/create', async (req, res) => {
 
 // Route to delete entire table
 router.get('/delete', async (req, res) => {
-  const query = `DROP TABLE IF EXISTS table1`;
+  const query = `DROP TABLE IF EXISTS table2`;
 
   try {
     await pool.query(query);
@@ -40,7 +40,7 @@ router.get('/delete', async (req, res) => {
 // Route to fetch all data from table
 router.get('/data', async (req, res) => {
   try {
-    const [rows] = await pool.query('SELECT * FROM table1');
+    const [rows] = await pool.query('SELECT * FROM table2');
     res.render('table', { data: rows });  // Assuming your EJS template is named 'table'
   } catch (err) {
     console.error('❌ Error fetching data:', err.message);
@@ -52,7 +52,7 @@ router.get('/data', async (req, res) => {
 router.delete('/delete/:id', async (req, res) => {
   const { id } = req.params;
   try {
-    const [result] = await pool.query('DELETE FROM table1 WHERE id = ?', [id]);
+    const [result] = await pool.query('DELETE FROM table2 WHERE id = ?', [id]);
     if (result.affectedRows === 0) {
       return res.status(404).send('❌ No record found with that ID');
     }
