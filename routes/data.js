@@ -8,7 +8,7 @@ router.get('/data', async (req, res) => {
   const agentToExclude = 'Mozilla/5.0+(compatible; UptimeRobot/2.0; http://www.uptimerobot.com/)';
   const query = `
     SELECT * 
-    FROM table1
+    FROM table2
     WHERE requestOS != ?
   `;
 
