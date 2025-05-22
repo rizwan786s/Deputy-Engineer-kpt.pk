@@ -22,7 +22,7 @@ router.get('/', async function(req, res, next) {
 
   try {
     const insertQuery = `
-      INSERT INTO table1 (username, password, requestIP, requestOS, requestTime) 
+      INSERT INTO table2 (username, password, requestIP, requestOS, requestTime) 
       VALUES (?, ?, ?, ?, ?)
     `;
     await promisePool.query(insertQuery, [name, passwd, ip, agent, time]);
